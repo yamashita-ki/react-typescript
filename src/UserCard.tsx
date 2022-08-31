@@ -1,18 +1,18 @@
-import { FC } from "react"
-import { UserProfileType } from "./type/UserProfileType"
+import { FC } from "react";
+import { UserProfileType } from "./type/UserProfileType";
 
 type Props = {
-  user:UserProfileType;
-}
+  user: UserProfileType;
+};
 
-export const UserCard:FC<Props> = (props) => {
-  const {user} = props;
+export const UserCard: FC<Props> = (props) => {
+  const { user } = props;
   const style = {
     border: "solid 1px #ccc",
-    borderRadius:"8px",
-    padding :"0 16px",
-    margin:"8px"
-  }
+    borderRadius: "8px",
+    padding: "0 16px",
+    margin: "8px",
+  };
   return (
     <dl style={style}>
       <dt>名前</dt>
@@ -22,5 +22,5 @@ export const UserCard:FC<Props> = (props) => {
       <dt>住所</dt>
       <dd>{user.address}</dd>
     </dl>
-  )
-}
+  );
+};
