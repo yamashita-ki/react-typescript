@@ -1,38 +1,13 @@
-import axios from "axios";
 import "./App.css";
-import { UserType } from "./type/api/UserType";
+import { useAllUsers } from "./hooks/useAllUsers";
 import { UserCard } from "./UserCard";
-import { useState } from "react";
-import { UserProfileType } from "./type/UserProfileType";
 
 function App() {
-  const [userProfiles, setUserProfiles] = useState<Array<UserProfileType>>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const onClickFetchUser = () => {
-    setLoading(true);
-    setError(false);
-    axios
-      .get<Array<UserType>>("https://jsonplaceholder.typicode.com/users")
-      .then((res) => {
-        const data = res.data.map((user) => ({
-          id: user.id,
-          name: `${user.name}(${user.username})`,
-          email: user.email,
-          address: `${user.address.city}${user.address.suite}${user.address.street}`,
-        }));
-        setUserProfiles(data);
-      })
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  const { fetchUsers, userProfiles, loading, error } = useAllUsers();
+  const onClickFetchUser = () => {};
   return (
     <div className="App">
-      <button onClick={onClickFetchUser}>データ取得</button>
+      <button onClick={fetchUsers}>データ取得</button>
       <br />
       {error ? (
         <p style={{ color: "red" }}>データ取得に失敗しました。</p>
