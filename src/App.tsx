@@ -1,26 +1,15 @@
-import "./App.css";
-import { useAllUsers } from "./hooks/useAllUsers";
-import { UserCard } from "./UserCard";
+import { Button, ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./router/Router";
+import theme from "./theme/theme";
 
 function App() {
-  const { fetchUsers, userProfiles, loading, error } = useAllUsers();
-  const onClickFetchUser = () => {};
   return (
-    <div className="App">
-      <button onClick={fetchUsers}>データ取得</button>
-      <br />
-      {error ? (
-        <p style={{ color: "red" }}>データ取得に失敗しました。</p>
-      ) : loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {userProfiles.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
-        </>
-      )}
-    </div>
+    <ChakraProvider theme={theme}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ChakraProvider>
   );
 }
 
